@@ -10,7 +10,7 @@ var screen_size # size of game window
 # Called when a node enters the scene tree
 func _ready() -> void:
 	screen_size = get_viewport_rect().size # to later clamp player with this region
-	#hide() # player hidden when game starts
+	hide() # player hidden when game starts
 
 # Called every frame, used to update elements of the game
 func _process(delta: float) -> void:
