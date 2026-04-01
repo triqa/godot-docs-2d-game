@@ -21,8 +21,13 @@ func game_over() -> void:
 	
 func new_game():
 	score = 0
+	# remove all mobs (mobs is a created scene group of all Mob's) 
+	# here, call_group() calls the queue_free() func on every node in the mobs group
+	get_tree().call_group("mobs", "queue_free")
+	# update HUD info
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready!")
+	# reset player to starting pos.
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 
