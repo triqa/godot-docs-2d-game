@@ -14,7 +14,7 @@ func _ready() -> void:
 
 # Called every frame, used to update elements of the game
 func _process(delta: float) -> void:
-	var velocity = Vector2.ZERO # the player's movement vector
+	var velocity = Vector2.ZERO # by default, the player's movement vector should be (0,0) aka not moving
 	# check for input
 	# add/subtract from velocity to obtain total direction
 	if Input.is_action_pressed("move_right"):
@@ -37,10 +37,10 @@ func _process(delta: float) -> void:
 	
 	# move in given direction by updating player's position
 	position += velocity * delta
-	# restrit the player to only moving within the screen
+	# restrict the player to only moving within the screen
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
-	# play appropriate animation
+	# Play appropriate animation
 	# if movement along x-axis ...
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"
@@ -57,11 +57,11 @@ func _on_body_entered(body: Node2D) -> void:
 	# emits signal when hit with enemy
 	hit.emit()
 	# disable player's collision so don't trigger the hit signal more than once
-	# set_deferred ensures only disale shape when safe to do so
+	# set_deferred ensures only disable shape when safe to do so
 	$CollisionShape2D.set_deferred("disabled", true)
 	
 # Call to reset the player when starting a new game
 func start(pos):
 	position = pos
 	show()
-	$CollisionShape2D.disabled = false
+	$CollisionShape2D.disabled = false  # can collide again
