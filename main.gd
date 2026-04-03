@@ -15,11 +15,16 @@ func _process(delta: float) -> void:
 
 
 func game_over() -> void:
+	$Music.stop()
+	$DeathSound.play()
+	
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
 	
 func new_game():
+	$Music.play()
+	
 	score = 0
 	# remove all mobs (mobs is a created scene group of all Mob's) 
 	# here, call_group() calls the queue_free() func on every node in the mobs group
